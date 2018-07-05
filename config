@@ -4,10 +4,14 @@
 PREFIX ?= /usr
 
 # Lua version and dirs
-LUA_SYS_VER ?= 5.2
-LUA_LIBDIR ?= $(PREFIX)/lib/lua/$(LUA_SYS_VER)
-LUA_DIR ?= $(PREFIX)/share/lua/$(LUA_SYS_VER)
-LUA_INC ?= $(PREFIX)/include/lua$(LUA_SYS_VER)
+LUA_SYS_VER ?= 5.1
+LUA_LIBDIR ?= /usr/local/openresty/luajit/lib/lua/$(LUA_SYS_VER)
+LUA_DIR ?= /usr/local/openresty/luajit/share/lua/$(LUA_SYS_VER)
+LUA_INC ?= /usr/local/openresty/luajit/include/luajit-2.1
+#LUA_LIBDIR ?= $(PREFIX)/lib/lua/$(LUA_SYS_VER)
+#LUA_DIR ?= $(PREFIX)/share/lua/$(LUA_SYS_VER)
+#LUA_INC ?= $(PREFIX)/include/lua$(LUA_SYS_VER)
+
 
 # OS dependent
 UNAME_S := $(shell uname -s)
@@ -24,9 +28,13 @@ endif
 DRIVER_LIBS_mysql ?= -L/usr/lib -lmysqlclient -lz
 DRIVER_INCS_mysql ?= -I/usr/include/mysql
 # - Oracle OCI8
-DRIVER_LIBS_oci8 ?= -L/home/oracle/OraHome1/lib -lz -lclntsh
-DRIVER_INCS_oci8 ?= -I/home/oracle/OraHome1/rdbms/demo \
-                    -I/home/oracle/OraHome1/rdbms/public
+#DRIVER_LIBS_oci8 ?= -L/home/oracle/OraHome1/lib -lz -lclntsh
+#DRIVER_INCS_oci8 ?= -I/home/oracle/OraHome1/rdbms/demo \
+#                    -I/home/oracle/OraHome1/rdbms/public
+DRIVER_LIBS_oci8 ?= -L/usr/lib/oracle/12.1/client64/lib/ -lclntshcore -lclntsh -lipc1 -lmql1 -lnnz12 -locci -lociei -locijdbc12 -lons -loramysql12 -lsqlplusic -lsqlplus
+DRIVER_INCS_oci8 ?= -I/usr/include/oracle/12.1/client64/ \
+		    -I/lib64/
+
 # - PostgreSQL
 #DRIVER_LIBS_postgres ?= -L/usr/local/pgsql/lib -lpq
 #DRIVER_INCS_postgres ?= -I/usr/local/pgsql/include/
